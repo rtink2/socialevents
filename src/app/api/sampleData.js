@@ -25,7 +25,7 @@ export const sampleData = [
     {
         id: '2',
         title: 'Audience With Adele',
-        date: '2021-12-2',
+        date: '2021-12-02',
         category: 'music',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
         city: 'London, UK',
