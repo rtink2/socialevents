@@ -1,5 +1,6 @@
 import React from 'react'
-import { Icon, Item, List, Segment } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { Button, Icon, Item, List, Segment } from 'semantic-ui-react'
 import EventListAttendee from './EventListAttendee'
 
 export default function EventListItem({ event, selectEvent, deleteEvent }) {
@@ -31,28 +32,33 @@ export default function EventListItem({ event, selectEvent, deleteEvent }) {
       </Segment>
       <Segment clearing>
         <div>{event.description}</div>
-        <Icon
-          onClick={() => deleteEvent(event.id)}
-          color='red'
-          inverted
-          size='large'
-          name='trash alternate'
-        />
-        <Icon
-          onClick={() => selectEvent(event)}
-          color='olive'
-          inverted
-          size='large'
-          name='edit'
-        />
-        {/* <Button
-          onClick={() => selectEvent(event)}
-          color='teal'
+        {/* delete icon */}
+        <Button
           floated='right'
+          inverted
+          animated='fade'
           compact
-          content='View'
-        /> */}
-        
+          onClick={() => deleteEvent(event.id)}
+        >
+          <Button.Content hidden style={{color: '#e81a1a'}}>Delete</Button.Content>
+          <Button.Content visible>
+            <Icon name='trash alternate' color='red' />
+          </Button.Content>
+        </Button>
+        {/* edit icon */}
+        <Button
+          floated='right'
+          inverted
+          animated='fade'
+          compact
+          as={Link}
+          to={`/events/${event.id}`}
+        >
+          <Button.Content hidden style={{color: '#367588'}}>Edit</Button.Content>
+          <Button.Content visible>
+            <Icon name='edit' color='olive' />
+          </Button.Content>
+        </Button>
       </Segment>
     </Segment.Group>
   )

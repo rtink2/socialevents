@@ -1,36 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { NavLink, useHistory } from 'react-router-dom'
 import { Button, Container, Menu } from 'semantic-ui-react'
+import SignedInMenu from './SignedInMenu'
+import SignedOutMenu from './SignedOutMenu'
 
-export default function NavBar({ setFormOpen }) {
+export default function NavBar() {
+  const history = useHistory()
+  const [authenticated, setAuthenticated] = useState(false)
+
+  function handleSignOut() {
+    setAuthenticated(false)
+    history.push('/')
+  }
+
   return (
     <Menu inverted fixed='top'>
       <Container>
-        <Menu.Item>
+        <Menu.Item as={NavLink} exact to='/' header>
           <img
             src='/assets/logo.png'
             alt='logo'
             style={{ marginLeft: '0.5em' }}
           />
-          SocialEvents
+         SocialEvents
         </Menu.Item>
-        <Menu name='SocialEvents' />
-        <Menu.Item>
-          <Button
-            onClick={() => setFormOpen(true)}
-            inverted
-            color='olive'
-            content='Create Event'
-          />
-        </Menu.Item>
-        <Menu.Item position='right'>
-          <Button inverted color='orange' content='Login' />
-          <Button
-            inverted
-            color='grey'
-            content='Register'
-            style={{ marginLeft: '0.5em' }}
-          />
-        </Menu.Item>
+        <Menu.Item as={NavLink} to='/events' name='Events' />
+        {authenticated && (
+          <Menu.Item as={NavLink} to='/createEvent'>
+            <Button inverted color='olive' content='Create Event' />
+          </Menu.Item>
+        )}
+        {authenticated ? (
+          <SignedInMenu signOut={handleSignOut} />
+        ) : (
+          <SignedOutMenu setAuthenticated={setAuthenticated} />
+        )}
       </Container>
     </Menu>
   )

@@ -2,6 +2,11 @@ body {
   background-color: #ccefdd;
 }
 
+*{
+  margin:0;
+  padding:0;
+  }
+
 .ui.fixed.menu {
   background-image: linear-gradient(
     135deg,
@@ -20,4 +25,20 @@ i {
   margin-left: 12px !important;
   padding-top: 5px !important;
   cursor: grab;
+}
+
+.masthead {
+  display: flex;
+  align-items: center;
+  background-image: linear-gradient(
+    135deg,
+    rgb(24, 42, 115) 0%,
+    rgb(33, 138, 174) 69%,
+    rgb(32, 167, 172) 89%
+  ) !important;
+  height: 100vh;
+}
+
+.masthead h1.ui.header {
+  font-size: 4em;
 }
