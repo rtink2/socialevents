@@ -1,9 +1,15 @@
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Button, Form, Header, Segment } from 'semantic-ui-react'
 import cuid from 'cuid'
 import { Link } from 'react-router-dom'
+import { createEvent, updateEvent } from '../eventsActions'
 
-export default function EventForm({ setFormOpen, setEvents, createEvent, selectedEvent, updateEvent }) {
+export default function EventForm({ match, history }) {
+  const dispatch = useDispatch()
+  const selectedEvent = useSelector((state) =>
+    state.event.events.find((e) => e.id === match.params.id)
+  )
   const initialValues = selectedEvent ?? {
     title: '',
     category: '',
@@ -12,19 +18,20 @@ export default function EventForm({ setFormOpen, setEvents, createEvent, selecte
     venue: '',
     date: '',
   }
+
   const [values, setValues] = useState(initialValues)
 
   function handleFormSubmit() {
     selectedEvent
-    ? updateEvent({...selectedEvent, ...values})
-    : createEvent({
-      ...values,
-      id: cuid(),
-      hostedBy: 'Adele',
-      attendees: [],
-      hostPhotoURL: '/assets/user.png',
-    })
-    setFormOpen(false)
+      ? dispatch(updateEvent({ ...selectedEvent, ...values }))
+      : dispatch(createEvent({
+          ...values,
+          id: cuid(),
+          hostedBy: 'Adele',
+          attendees: [],
+          hostPhotoURL: '/assets/user.png',
+        }))
+        history.push('/events')
   }
 
   function handleInputChanges(e) {
@@ -99,7 +106,8 @@ export default function EventForm({ setFormOpen, setEvents, createEvent, selecte
           content='Submit'
         />
         <Button
-          as={Link} to='/events'
+          as={Link}
+          to='/events'
           type='submit'
           floated='right'
           color='red'

@@ -12,12 +12,12 @@ export const sampleData = [
         attendees: [
             {
                 id: 'a',
-                name: 'Freya',
+                displayName: 'Freya',
                 photoURL: 'https://randomuser.me/api/portraits/women/5.jpg'
             },
             {
                 id: 'b',
-                name: 'Hope',
+                displayName: 'Hope',
                 photoURL: 'https://randomuser.me/api/portraits/women/50.jpg'
             }
         ]
@@ -26,7 +26,7 @@ export const sampleData = [
         id: '2',
         title: 'Audience With Adele',
         date: '2021-12-02',
-        category: 'music',
+        category: 'culture',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
         city: 'London, UK',
         venue: 'London Palladium, 8 Argyll St, London, UK',
@@ -35,12 +35,12 @@ export const sampleData = [
         attendees: [
             {
                 id: 'a',
-                name: 'Gaga',
+                displayName: 'Gaga',
                 photoURL: 'https://randomuser.me/api/portraits/women/55.jpg'
             },
             {
                 id: 'b',
-                name: 'Kate',
+                displayName: 'Kate',
                 photoURL: 'https://randomuser.me/api/portraits/women/57.jpg'
             }
         ]
@@ -49,7 +49,7 @@ export const sampleData = [
         id: '3',
         title: 'Wedding - Adele & Raven',
         date: '2021-10-10',
-        category: 'special',
+        category: 'drinks',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
         city: 'LA, USA',
         venue: "Adele & Raven's, North Beverly Park, Los Angeles, CA USA",
@@ -58,12 +58,12 @@ export const sampleData = [
         attendees: [
             {
                 id: 'a',
-                name: 'Jane',
+                displayName: 'Jane',
                 photoURL: 'https://randomuser.me/api/portraits/women/40.jpg'
             },
             {
                 id: 'b',
-                name: 'Lilly',
+                displayName: 'Lilly',
                 photoURL: 'https://randomuser.me/api/portraits/women/50.jpg'
             }
         ]
