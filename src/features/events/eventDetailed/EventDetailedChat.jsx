@@ -54,7 +54,7 @@ export default function EventDetailedChat() {
                   <Comment.Metadata>
                     <div>Just now</div>
                   </Comment.Metadata>
-                  <Comment.Text>Elliot you are always so right :)</Comment.Text>
+                  <Comment.Text>Raven you are always so right :)</Comment.Text>
                   <Comment.Actions>
                     <Comment.Action>Reply</Comment.Action>
                   </Comment.Actions>

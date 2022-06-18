@@ -2,7 +2,7 @@ export const sampleData = [
     {
         id: '1',
         title: 'Adele One Night Only',
-        date: '2021-11-19',
+        date: new Date('2021-11-19'),
         category: 'music',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
         city: 'LA, USA',
@@ -25,7 +25,7 @@ export const sampleData = [
     {
         id: '2',
         title: 'Audience With Adele',
-        date: '2021-12-02',
+        date: new Date('2021-12-02'),
         category: 'culture',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
         city: 'London, UK',
@@ -48,7 +48,7 @@ export const sampleData = [
     {
         id: '3',
         title: 'Wedding - Adele & Raven',
-        date: '2021-10-10',
+        date: new Date('2022-10-10'),
         category: 'drinks',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
         city: 'LA, USA',
