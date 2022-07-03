@@ -1,3 +1,4 @@
+/* global google */ 
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Formik, Form } from 'formik'
@@ -11,6 +12,7 @@ import MyTextArea from '../../../app/common/form/MyTextArea'
 import MySelectInput from '../../../app/common/form/MySelectInput'
 import { categoryData } from '../../../app/api/categoryOptions'
 import MyDateInput from '../../../app/common/form/MyDateInput'
+import MyPlaceInput from '../../../app/common/form/MyPlaceInput'
 
 export default function EventForm({ match, history }) {
   const dispatch = useDispatch()
@@ -21,8 +23,14 @@ export default function EventForm({ match, history }) {
     title: '',
     category: '',
     description: '',
-    city: '',
-    venue: '',
+    city: {
+      address: '',
+      latLng: null,
+    },
+    venue: {
+      address: '',
+      latLng: null,
+    },
     date: '',
   }
 
@@ -30,8 +38,12 @@ export default function EventForm({ match, history }) {
     title: Yup.string().required('Please provide a title'),
     category: Yup.string().required('Please provide a category'),
     description: Yup.string().required(),
-    city: Yup.string().required('Please provide a city'),
-    venue: Yup.string().required('Please provide a venue'),
+    city: Yup.object().shape({
+      address: Yup.string().required('Please provide a city'),
+    }),
+    venue: Yup.object().shape({
+      address: Yup.string().required('Please provide a venue'),
+    }),
     date: Yup.string().required(),
   })
 
@@ -55,54 +67,66 @@ export default function EventForm({ match, history }) {
           history.push('/events')
         }}
       >
-        {({isSubmitting, dirty, isValid}) => (
-        <Form className='ui form'>
-          <Header sub color='teal' content='Event Details' />
-          <MyTextInput name='title' placeholder='Event Title' />
-          <MySelectInput
-            name='category'
-            placeholder='Event Category'
-            options={categoryData}
-          />
-          <MyTextArea
-            name='description'
-            placeholder='Event Description'
-            rows={3}
-          />
-          <Header sub color='teal' content='Event Location Details' />
-          <MyTextInput name='city' placeholder='Event City' />
-          <MyTextInput name='venue' placeholder='Event Venue' />
-          <MyDateInput
-            name='date'
-            placeholderText='Event Date'
-            dateFormat='MMMM d, yyyy h:mm a'
-            timeFormat='h:mm'
-            showTimeSelect
-            timeCaption='time'
-            autocomplete='off'
-          />
-          <Button
-            loading={isSubmitting}
-            disabled={!isValid || !dirty || isSubmitting}
-            type='submit'
-            floated='right'
-            color='blue'
-            inverted
-            compact
-            content='Submit'
-          />
-          <Button
-            disabled={isSubmitting}
-            as={Link}
-            to='/events'
-            type='submit'
-            floated='right'
-            color='red'
-            inverted
-            compact
-            content='Cancel'
-          />
-        </Form>
+        {({ isSubmitting, dirty, isValid, values }) => (
+          <Form className='ui form'>
+            <Header sub color='teal' content='Event Details' />
+            <MyTextInput name='title' placeholder='Event Title' />
+            <MySelectInput
+              name='category'
+              placeholder='Event Category'
+              options={categoryData}
+            />
+            <MyTextArea
+              name='description'
+              placeholder='Event Description'
+              rows={3}
+            />
+            <Header sub color='teal' content='Event Location Details' />
+            <MyPlaceInput 
+              name='city' 
+              placeholder='Event City' 
+            />
+            <MyPlaceInput 
+              name='venue'
+              disabled={!values.city.latLng}
+              placeholder='Event Venue'
+              options={{
+                location: new google.maps.LatLng(values.city.latLng),
+                radius: 1000,
+                types: ['establishment']
+              }}
+            />
+            <MyDateInput
+              name='date'
+              placeholderText='Event Date'
+              dateFormat='MMMM d, yyyy h:mm a'
+              timeFormat='h:mm'
+              showTimeSelect
+              timeCaption='time'
+              autocomplete='off'
+            />
+            <Button
+              loading={isSubmitting}
+              disabled={!isValid || !dirty || isSubmitting}
+              type='submit'
+              floated='right'
+              color='blue'
+              inverted
+              compact
+              content='Submit'
+            />
+            <Button
+              disabled={isSubmitting}
+              as={Link}
+              to='/events'
+              type='submit'
+              floated='right'
+              color='red'
+              inverted
+              compact
+              content='Cancel'
+            />
+          </Form>
         )}
       </Formik>
     </Segment>
